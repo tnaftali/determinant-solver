@@ -1,48 +1,45 @@
 from Classes import Pivot
-import math
+from Validation import is_number, is_valid_range
 
 
 def insert_matrix():
-    matrix = []
-    str_range = raw_input("Please insert the range of a squared matrix: ")
+    str_range = raw_input('Please insert the range of a square matrix: ')
     is_valid_range(str_range)
     while not is_valid_range(str_range):
-        str_range = raw_input("Please insert a valid positive number: ")
+        str_range = raw_input('Please insert a valid positive number, higher than 1: ')
     mat_range = int(str_range)
+    matrix = []
     for i in range(mat_range):
-        matrix.append([])
-        for j in range(mat_range):
-            num_str = raw_input("Row " + str(i + 1) + ", Col " + str(j + 1) + ": ")
-            while not is_number(num_str):
-                num_str = raw_input("Please insert valid number for Row " + str(i + 1) + ", Col " + str(j + 1) + ": ")
-            num = int(num_str)
-            matrix[i].append(num)
-    # matrix = []
-    # string_matrix = raw_input('Please insert a numeric matrix, with numbers in same row separated by comma,'
-    #                           'and rows separated by semicolon: ')
-    # str_rows = string_matrix.split(';')
-    # for row in str_rows:
-    #     validate_row(row)
-    # while not valid_string_matrix(str_rows):
-    #     string_matrix = raw_input('Please insert all valid numbers, separated by comma in same row,'
-    #                               'and rows separated by semicolon: ')
-    #     str_rows = string_matrix.replace(' ', '').split(';')
-    # # matrix = parse_string_matrix(str_matrix)
-    # # print_matrix(str_matrix)
+        string_row = raw_input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) + ' numbers separated by comma: ')
+        int_row = get_row(string_row, mat_range)
+        while int_row is None:
+            string_row = raw_input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) +
+                                   ' valid numbers separated by comma: ')
+            int_row = get_row(string_row, mat_range)
+        matrix.append(int_row)
     return matrix
 
 
-def valid_string_matrix(str_matrix):
+def get_row(row, range):
+    numbers = row.replace(' ', '').split(',')
+    length = len(numbers)
+    int_row = []
     valid = True
-    for x in str_matrix:
-        if not is_number(x):
-            valid = False
-    if valid:
-        # Check whether the matrix is square
-        length = len(str_matrix)
-        # if math.sqrt(length).is_integer():
-        print math.sqrt(length)
-    return valid
+    i = 0
+    if length == range:
+        while i < length and valid:
+            num = numbers[i]
+            if is_number(num):
+                int_row.append(int(num))
+            else:
+                valid = False
+            i += 1
+        if valid:
+            return int_row
+        else:
+            return None
+    else:
+        return None
 
 
 def initialize_matrix(mat_range):
@@ -60,15 +57,13 @@ def calculate_determinant(matrix):
     if not isinstance(matrix, list):
         return matrix
     else:
-        pivot = Pivot(len(matrix))
-        pivot.number = matrix[pivot.row_index][pivot.col_index]
-        while pivot.number == 0:
-            pivot = Pivot(len(matrix))
-        get_reduced_matrix(matrix, pivot)
-        # det = calculate_determinant(reduced_matrix)
-        # res = pivot * det
-        # return res
-        return 1
+        length = len(matrix)
+        if length > 2:
+            pivot = Pivot(matrix)
+            reduced_matrix = get_reduced_matrix(matrix, pivot)
+            return pivot.number * pow(-1, ((pivot.row_index + 1) + (pivot.col_index + 1))) * calculate_determinant(reduced_matrix)
+        else:
+            return calculate(matrix)
 
 
 def get_reduced_matrix(matrix, pivot):
@@ -77,72 +72,42 @@ def get_reduced_matrix(matrix, pivot):
         res = (matrix[0][0] * matrix[1][1]) - (matrix[1][0] * matrix[0][1])
         return res
     else:
-        pivot_row = [matrix[pivot.row_index]]
+        operating_row = matrix[pivot.row_index]
+        new_matrix = []
         # Up rows
-        print pivot.row_index
-        for i in range(pivot.row_index, 0, - 1):
-            print i
-            make_0(matrix[i], matrix[i - 1], pivot.col_index)
-        # Down rows
-        for i in range(pivot.row_index + 1, mat_range):
-            if i != mat_range - 1:
-                make_0(matrix[i], matrix[i + 1], pivot.col_index)
-            else:
-                make_0(matrix[i], matrix[pivot.row_index], pivot.col_index)
-        # for i in range(1, mat_range):
-        #     if i == (mat_range - 1):
-        #         aux_matrix.append(make_0_first(matrix[i], matrix[0]))
-        #     else:
-        #         aux_matrix.append(make_0_first(matrix[i], matrix[i + 1]))
-        # # print_matrix(aux_matrix)
-        # reduced_matrix = get_new_matrix(aux_matrix, mat_range)
-        # print_matrix(reduced_matrix)
-        # return reduced_matrix
+        if pivot.row_index != 0:
+            for i in range(pivot.row_index - 1, -1, - 1):
+                new_matrix.insert(0, operate_rows(matrix[i], operating_row, pivot.col_index))
+        if pivot.row_index != (mat_range - 1):
+            # Down rows
+            for i in range(pivot.row_index + 1, mat_range):
+                new_matrix.append(operate_rows(matrix[i], operating_row, pivot.col_index))
+        return remove_pivot_column(new_matrix, pivot.col_index)
 
 
-def get_new_matrix(det, mat_range):
-    new_mat = []
-    for i in range(1, mat_range):
-        new_mat.append([])
-        for j in range(1, mat_range):
-            new_mat[i - 1].append(det[i][j])
-    return new_mat
+def calculate(matrix):
+    return (matrix[0][0] * matrix[1][1]) - (matrix[1][0] * matrix[0][1])
 
 
-def make_0(row1, row2, col_index):
+def operate_rows(row1, row2, col_index):
     length = len(row1)
     result = []
-    print str(row2[col_index]) + str(row1) + " - " + str(row1[col_index]) + str(row2)
+    minus = False
+    if row1[col_index] > 0:
+        minus = True
     for i in range(length):
-        result.append((row2[0] * row1[i]) - (row1[0] * row2[i]))
-    print "Result: " + str(result)
+        if minus:
+            result.append(row1[i] - (row1[col_index] * row2[i]))
+        else:
+            result.append(row1[i] + (row1[col_index] * row2[i]))
     return result
 
 
-def is_valid_range(num_str):
-    valid = True
-    if not is_number(num_str):
-        valid = False
-    else:
-        num = int(num_str)
-        if not is_positive(num):
-            valid = False
-    return valid
-
-
-def is_number(num):
-    try:
-        val = int(num)
-        return True
-    except ValueError:
-        return False
-
-
-def is_positive(num):
-    if num > 0:
-        return True
-    else:
-        return False
+def remove_pivot_column(matrix, col_index):
+    length = len(matrix)
+    for i in range(length):
+        del matrix[i][col_index]
+    return matrix
 
 
 def print_matrix(matrix):
@@ -152,10 +117,17 @@ def print_matrix(matrix):
     print "------------"
 
 
-mat_range = 3
-matrix = initialize_matrix(mat_range)
-# matrix = insert_matrix()
-print "Original Matrix: "
-print_matrix(matrix)
+def main():
+    print '-------------------------------------------------------'
+    matrix = insert_matrix()
+    print "Matrix: "
+    print_matrix(matrix)
+    print 'Determinant: ' + str(calculate_determinant(matrix))
 
-calculate_determinant(matrix)
+main()
+print 'Another one?'
+repeat = raw_input('\'Y\' \'N\':')
+while repeat.lower() == 'y':
+    main()
+    print 'Another one?'
+    repeat = raw_input('\'Y\' \'N\':')
