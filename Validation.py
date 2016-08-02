@@ -10,11 +10,19 @@ def is_valid_range(num_str):
 
 
 def is_number(num):
-    try:
-        val = int(num)
-        return True
-    except ValueError:
-        return False
+    if '/' in num:
+        num_array = num.split('/')
+        try:
+            val = float(num_array[0]) / float(num_array[1])
+            return val
+        except ValueError:
+            return None
+    else:
+        try:
+            val = float(num)
+            return val
+        except ValueError:
+            return None
 
 
 def is_positive(num):
