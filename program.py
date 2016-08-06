@@ -61,9 +61,9 @@ def calculate_determinant(matrix):
         length = len(matrix)
         if length > 2:
             pivot = Pivot(matrix)
-            print_matrix(pivot.new_matrix)
+            # print_matrix(pivot.new_matrix)
             reduced_matrix = get_reduced_matrix(pivot.new_matrix, pivot)
-            print_matrix(reduced_matrix)
+            # print_matrix(reduced_matrix)
             return float(pivot.number) * (float(pow(-1, ((pivot.row_index + 1) + (pivot.col_index + 1)))) * calculate_determinant(reduced_matrix))
         else:
             return calculate(matrix)
@@ -102,7 +102,7 @@ def operate_rows(row1, row2, col_index):
         if minus:
             result.append(row1[i] - (float(row1[col_index]) * float(row2[i])))
         else:
-            result.append(row1[i] + (row1[col_index] * row2[i]))
+            result.append(row1[i] + (float(row1[col_index]) * float(row2[i])))
     return result
 
 
