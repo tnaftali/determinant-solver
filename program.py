@@ -1,3 +1,8 @@
+'''
+    Program that solves determinants of squared matrices.
+    Created by Tobías Naftali'
+'''
+
 from Classes import Pivot
 from Validation import is_number, is_valid_range
 
@@ -43,17 +48,6 @@ def get_row(row, range):
         return None
 
 
-def initialize_matrix(mat_range):
-    num = 1
-    matrix = []
-    for i in range(mat_range):
-        matrix.append([])
-        for j in range(mat_range):
-            matrix[i].append(num)
-        num += 1
-    return matrix
-
-
 def calculate_determinant(matrix):
     if not isinstance(matrix, list):
         return matrix
@@ -61,9 +55,7 @@ def calculate_determinant(matrix):
         length = len(matrix)
         if length > 2:
             pivot = Pivot(matrix)
-            # print_matrix(pivot.new_matrix)
             reduced_matrix = get_reduced_matrix(pivot.new_matrix, pivot)
-            # print_matrix(reduced_matrix)
             return float(pivot.number) * (float(pow(-1, ((pivot.row_index + 1) + (pivot.col_index + 1)))) * calculate_determinant(reduced_matrix))
         else:
             return calculate(matrix)
