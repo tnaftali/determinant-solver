@@ -1,16 +1,19 @@
 import decimal
 
+
 class Pivot(object):
     def __init__(self, matrix):
         indexes = self.not_null_indexes(matrix)
         if indexes is not None:
             self.row_index = indexes[0]
             self.col_index = indexes[1]
+            print self.row_index
+            print self.col_index
             self.number = matrix[self.row_index][self.col_index]
             inverse_of_first = self.get_inverse(self.number)
             for i in range(len(matrix)):
-                dec = decimal.Decimal(matrix[0][i]) * decimal.Decimal(inverse_of_first)
-                matrix[0][i] = format(dec, '.10f')
+                dec = decimal.Decimal(matrix[self.row_index][i]) * decimal.Decimal(inverse_of_first)
+                matrix[self.row_index][i] = format(dec, '.10f')
             self.new_matrix = matrix
 
     @staticmethod

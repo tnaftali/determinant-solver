@@ -1,8 +1,3 @@
-'''
-    Program that solves determinants of squared matrices.
-    Created by Tobías Naftali'
-'''
-
 from Classes import Pivot
 from Validation import is_number, is_valid_range
 
@@ -87,14 +82,12 @@ def calculate(matrix):
 def operate_rows(row1, row2, col_index):
     length = len(row1)
     result = []
-    minus = False
-    if row1[col_index] > 0:
-        minus = True
     for i in range(length):
-        if minus:
-            result.append(row1[i] - (float(row1[col_index]) * float(row2[i])))
+        if row1[i] == 0:
+            res = (float(row1[i]))
         else:
-            result.append(row1[i] + (float(row1[col_index]) * float(row2[i])))
+            res = row1[i] - (float(row1[col_index]) * float(row2[i]))
+        result.append(res)
     return result
 
 
