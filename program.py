@@ -1,26 +1,23 @@
 import Determinant
 import Input
-
-
-def print_matrix(matrix):
-    print "------------"
-    for i in range(len(matrix)):
-        print matrix[i]
-    print "------------"
+import Output
 
 
 def mode_1():
     print '-------------------------------------------------------'
     matrix = Input.insert_matrix()
     print "Matrix: "
-    print_matrix(matrix)
+    Output.print_matrix(matrix)
     print 'Determinant: ' + str(Determinant.calculate_determinant(matrix))
 
 
 def mode_2(string_matrix):
     matrix = Input.get_matrix(string_matrix)
     result = Determinant.calculate_determinant(matrix)
-    return int(str(result).split('.')[0])
+    if result != 0:
+        return Output.round_number(result)
+    else:
+        return 0
 
 
 def main():
@@ -32,4 +29,6 @@ def main():
         print 'Another one?'
         repeat = raw_input('\'Y\' \'N\':')
 
+
+# Uncomment this to execute program
 # main()
