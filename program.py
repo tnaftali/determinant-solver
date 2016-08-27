@@ -8,7 +8,8 @@ def mode_1():
     matrix = Input.insert_matrix()
     print "Matrix: "
     Output.print_matrix(matrix)
-    print 'Determinant: ' + str(Determinant.calculate_determinant(matrix))
+    result = Determinant.calculate_determinant(matrix)
+    print 'Determinant: ' + str(Output.round_number(result))
 
 
 def mode_2(string_matrix):
@@ -30,5 +31,5 @@ def main():
         repeat = raw_input('\'Y\' \'N\':')
 
 
-# Uncomment this to execute program
-# main()
+# Uncomment this to execute program, comment to run tests
+main()
