@@ -12,7 +12,7 @@ class Pivot(object):
             inverse_of_first = self.get_inverse(self.number)
             for i in range(len(matrix)):
                 dec = decimal.Decimal(matrix[self.row_index][i]) * decimal.Decimal(inverse_of_first)
-                matrix[self.row_index][i] = format(dec, '.10')
+                matrix[self.row_index][i] = format(dec, '.100')
             self.new_matrix = matrix
         else:
             self.none = True

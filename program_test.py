@@ -26,3 +26,11 @@ class ProgramTest(unittest.TestCase):
     def test_range4MatrixWithNegativesAndZerosStartingWithZero(self):
         string_matrix = '0,3,7,0;2,-4,9,-3;-3,6,-7,6;5,6,-2,-8'
         self.assertEqual(program.mode_2(string_matrix), -537)
+
+    def test_range5MatrixWithNegatives(self):
+        string_matrix = '22,39,14,91,57;-53,-99,71,27,-23;-47,32,-41,-62,-58;26,-12,11,-33,31;-35,-63,-13,25,-90'
+        self.assertEqual(program.mode_2(string_matrix), 212085522)
+
+    def test_range5MatrixWithNegativesAndZerosStartingWithZero(self):
+        string_matrix = '0,0,14,91,57;-53,-99,71,27,-23;0,32,-41,-62,-58;26,0,11,-33,31;-35,-63,-13,25,-90'
+        self.assertEqual(program.mode_2(string_matrix), 13729398)
