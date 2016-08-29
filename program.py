@@ -1,6 +1,7 @@
 import Determinant
 import Input
 import Output
+import decimal
 
 
 def mode_1():
@@ -15,10 +16,13 @@ def mode_1():
 def mode_2(string_matrix):
     matrix = Input.get_matrix(string_matrix)
     result = Determinant.calculate_determinant(matrix)
-    if result != 0:
-        return Output.round_number(result)
+    if str(result).lower().__contains__('e'):
+        return Output.exponential_output(result)
     else:
-        return 0
+        if result != 0:
+            return Output.round_number(result)
+        else:
+            return 0
 
 
 def main():
@@ -32,4 +36,4 @@ def main():
 
 
 # Uncomment this to execute program, comment to run tests
-main()
+# main()

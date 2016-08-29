@@ -1,3 +1,6 @@
+import decimal
+
+
 def print_matrix(matrix):
     print "------------"
     for i in range(len(matrix)):
@@ -16,3 +19,8 @@ def round_number(num):
             else:
                 whole -= 1
     return whole
+
+
+def exponential_output(num):
+    return '{:.10E}'.format(decimal.Decimal(str(num))).lower()
+
