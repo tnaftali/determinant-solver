@@ -35,6 +35,13 @@ class ProgramTest(unittest.TestCase):
     def test_range5MatrixWithNegativesAndZerosStartingWithZero(self):
         string_matrix = '0,0,14,91,57;-53,-99,71,27,-23;0,32,-41,-62,-58;26,0,11,-33,31;-35,-63,-13,25,-90'
         self.assertEqual(program.mode_2(string_matrix), 13729398)
+        
+    def test_range6MatrixWithNegatives(self):
+        string_matrix = '8508,-9325,-9362,-2614,-7723,336;-7099,-7193,8985,-212,1975,-2149;-1740,9829,-8170,2691,' \
+                        '-6467,-3067;-2354,-2589,4993,9189,-6668,9802;8512,-4038,902,8556,-8036,6985;-2253,' \
+                        '5926,-7050,4402,844,-5675'
+        result = 1300658708375767858497913
+        self.assertEqual(program.mode_2(string_matrix), Output.exponential_output(result))
 
     def test_range7MatrixWithNegativesAndZerosStartingWithZero(self):
         string_matrix = '28,100,85,-26,45,-5,7;-14,-91,-7,-76,-71,-56,41;37,1,17,90,64,-33,82;93,72,38,43,-38,73,-54;' \
@@ -42,7 +49,7 @@ class ProgramTest(unittest.TestCase):
         result = -25676744657955
         self.assertEqual(program.mode_2(string_matrix), Output.exponential_output(result))
 
-    def test_range10MatrixWithNegativesAndZeros(self):
+    def test_range10MatrixWithNegatives(self):
         string_matrix = '28,45,-73,-75,46,36,21,26,48,30;-86,38,-32,82,-22,-19,-29,100,-72,-3;13,84,-76,-99,-78,94,14' \
                         ',-12,-4,56;43,-91,1,97,-11,59,61,-16,-31,-43;-60,-63,41,-52,-95,86,67,88,79,8;-28,-62,-20,' \
                         '-34,-51,12,-5,35,-8,-55;15,-93,34,-14,-54,-17,98,-85,-24,72;-81,18,-30,-47,50,11,39,66,90,7;' \
