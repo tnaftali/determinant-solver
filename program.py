@@ -1,10 +1,9 @@
 import Determinant
 import Input
 import Output
-import decimal
 
 
-def mode_1():
+def manual_input():
     print '-------------------------------------------------------'
     matrix = Input.insert_matrix()
     print "Matrix: "
@@ -13,7 +12,7 @@ def mode_1():
     print 'Determinant: ' + str(Output.round_number(result))
 
 
-def mode_2(string_matrix):
+def parameter_input(string_matrix):
     matrix = Input.get_matrix(string_matrix)
     result = Determinant.calculate_determinant(matrix)
     if str(result).lower().__contains__('e'):
@@ -26,11 +25,11 @@ def mode_2(string_matrix):
 
 
 def main():
-    mode_1()
+    manual_input()
     print 'Another one?'
     repeat = raw_input('\'Y\' \'N\':')
     while repeat.lower() == 'y':
-        mode_1()
+        manual_input()
         print 'Another one?'
         repeat = raw_input('\'Y\' \'N\':')
 
