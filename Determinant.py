@@ -2,13 +2,14 @@ from Pivot import Pivot
 
 
 def calculate_determinant(matrix):
-    if not isinstance(matrix, list):
+    if not isinstance(matrix, list):  # Checks whether the matrix is an instance, if it is, it should be the result
+                                        # so it returns it
         return matrix
     else:
         length = len(matrix)
         if length > 2:
-            pivot = Pivot(matrix)
-            if pivot.none:
+            pivot = Pivot(matrix)  # Creates new Pivot object
+            if pivot.none:  # If it's none, the matrix is null (all zero)
                 return 0
             else:
                 reduced_matrix = get_reduced_matrix(pivot.new_matrix, pivot)
@@ -26,13 +27,11 @@ def get_reduced_matrix(matrix, pivot):
     else:
         operating_row = matrix[pivot.row_index]
         new_matrix = []
-        # Up rows
-        if pivot.row_index != 0:
+        if pivot.row_index != 0:  # Up rows
             for i in range(pivot.row_index - 1, -1, - 1):
                 new_matrix.insert(0, operate_rows(matrix[i], operating_row, pivot.col_index))
         if pivot.row_index != (mat_range - 1):
-            # Down rows
-            for i in range(pivot.row_index + 1, mat_range):
+            for i in range(pivot.row_index + 1, mat_range):  # Down rows
                 new_matrix.append(operate_rows(matrix[i], operating_row, pivot.col_index))
         return remove_pivot_column(new_matrix, pivot.col_index)
 
