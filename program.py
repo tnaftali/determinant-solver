@@ -1,5 +1,5 @@
 # Algorithm that solves the determinant of any square range matrix.
-# Created by Tobías Naftali https://github.com/tnaftali/
+# Created by Tobias Naftali https://github.com/tnaftali/
 
 import Determinant
 import Input
