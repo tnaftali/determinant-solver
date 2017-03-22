@@ -2,18 +2,18 @@ import Validation
 
 
 def insert_matrix():
-    str_range = raw_input('Please insert the range of a square matrix: ')
+    str_range = input('Please insert the range of a square matrix: ')
     Validation.is_valid_range(str_range)
     while not Validation.is_valid_range(str_range):
-        str_range = raw_input('Please insert a valid positive number, higher than 1: ')
+        str_range = input('Please insert a valid positive number, higher than 1: ')
     mat_range = int(str_range)
     matrix = []
     for i in range(mat_range):
-        string_row = raw_input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) + ' numbers separated by comma: ')
+        string_row = input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) + ' numbers separated by comma: ')
         float_row = get_row(string_row, mat_range)
         while float_row is None:
-            string_row = raw_input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) +
-                                   ' valid numbers separated by comma: ')
+            string_row = input('Insert row ' + str(i + 1) + ', with ' + str(mat_range) +
+                               ' valid numbers separated by comma: ')
             float_row = get_row(string_row, mat_range)
         matrix.append(float_row)
     return matrix

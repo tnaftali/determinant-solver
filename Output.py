@@ -2,10 +2,10 @@ import decimal
 
 
 def print_matrix(matrix):
-    print "------------"
+    print("------------")
     for i in range(len(matrix)):
-        print matrix[i]
-    print "------------"
+        print(matrix[i])
+    print("------------")
 
 
 def round_number(num):

@@ -7,12 +7,12 @@ import Output
 
 
 def manual_input():
-    print '-------------------------------------------------------'
+    print('-------------------------------------------------------')
     matrix = Input.insert_matrix()
-    print "Matrix: "
+    print("Matrix: ")
     Output.print_matrix(matrix)
     result = Determinant.calculate_determinant(matrix)
-    print 'Determinant: ' + str(Output.round_number(result))
+    print('Determinant: ' + str(Output.round_number(result)))
 
 
 def parameter_input(string_matrix):
@@ -29,12 +29,12 @@ def parameter_input(string_matrix):
 
 def main():
     manual_input()
-    print 'Another one?'
-    repeat = raw_input('\'Y\' \'N\':')
+    print('Another one?')
+    repeat = input('\'Y\' \'N\':')
     while repeat.lower() == 'y':
         manual_input()
-        print 'Another one?'
-        repeat = raw_input('\'Y\' \'N\':')
+        print('Another one?')
+        repeat = input('\'Y\' \'N\':')
 
 
 # Uncomment this to execute program, comment to run tests

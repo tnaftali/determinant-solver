@@ -47,7 +47,7 @@ class ProgramTest(unittest.TestCase):
         string_matrix = '28,100,85,-26,45,-5,7;-14,-91,-7,-76,-71,-56,41;37,1,17,90,64,-33,82;93,72,38,43,-38,73,-54;' \
                         '-28,47,66,-9,48,-30,59;-23,-13,29,-20,-17,21,-3;-64,-99,3,84,49,5,-81'
         result = -25676744657955
-        self.assertEqual(program.parameter_input(string_matrix), Output.exponential_output(result))
+        self.assertEqual(program.parameter_input(string_matrix), result)
 
     def test_range10MatrixWithNegatives(self):
         string_matrix = '28,45,-73,-75,46,36,21,26,48,30;-86,38,-32,82,-22,-19,-29,100,-72,-3;13,84,-76,-99,-78,94,14' \
